@@ -1486,13 +1486,6 @@
 <!-- ══════════════════════════════════════
      SCRIPTS
 ══════════════════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const _sb = supabase.createClient(
-    'https://rdiiekxvuljuwtfpazaz.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkaWlla3h2dWxqdXd0ZnBhemF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MDk4NjIsImV4cCI6MjA5MjI4NTg2Mn0.7moQhd--8MOGHvP4NPFOJ8rNxL7ImXdA-qNr8FIHoI0'
-  );
-</script>
 <script>
   /* 팝업 배너 */
   (function() {
@@ -1557,47 +1550,31 @@
     document.getElementById('popup-overlay').classList.add('hidden');
   });
 
-  /* 폼 제출 — Supabase 저장 + 이메일 알림 */
+  /* 폼 제출 — /api/consult (Supabase 저장 + Resend 이메일) */
   document.getElementById('consultForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('.btn-submit');
     btn.disabled = true; btn.textContent = '신청 중...';
 
-    const payload = {
-      name:      this.name.value.trim(),
-      phone:     this.phone.value.trim(),
-      unit_type: this.unit_type.value,
-      purpose:   this.purpose.value,
-      message:   this.message.value.trim(),
-      project:   '정동 롯데캐슬 136'
-    };
-
-    /* 1) Supabase 저장 */
-    const { error } = await _sb.from('consultations').insert([payload]);
-    if (error) {
-      btn.disabled = false;
-      btn.textContent = '관심고객 등록하기';
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.\n' + error.message);
-      return;
-    }
-
-    /* 2) 이메일 알림 (Web3Forms) */
     try {
-      await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/consult', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: 'WEB3FORMS_ACCESS_KEY',
-          subject: `[정동 롯데캐슬 136] 새 관심고객 등록 — ${payload.name}`,
-          from_name: '정동 롯데캐슬 136 홈페이지',
-          이름: payload.name,
-          연락처: payload.phone,
-          관심타입: payload.unit_type || '미선택',
-          투자목적: payload.purpose || '미선택',
-          문의내용: payload.message || '없음'
+          name:      this.name.value.trim(),
+          phone:     this.phone.value.trim(),
+          unit_type: this.unit_type.value,
+          purpose:   this.purpose.value,
+          message:   this.message.value.trim()
         })
       });
-    } catch (_) {}
+      if (!res.ok) throw new Error((await res.json()).error || '오류');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = '관심고객 등록하기';
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.\n' + err.message);
+      return;
+    }
 
     document.getElementById('consultForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
