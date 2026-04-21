@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
       },
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
-        to: ['wnsgud86@gmail.com'],
+        to: ['simkorea86@gmail.com'],
         subject: `[정동 롯데캐슬 136] 새 관심고객 등록 — ${name}`,
         html: `
           <div style="font-family:'Apple SD Gothic Neo',sans-serif;max-width:520px;margin:0 auto;">
