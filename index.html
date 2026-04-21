@@ -218,14 +218,16 @@
     }
     .popup-close-btn {
       position: absolute; top: 10px; right: 10px; z-index: 20;
-      width: 34px; height: 34px;
-      background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 50%; cursor: pointer; color: #fff; font-size: 16px;
+      width: 38px; height: 38px;
+      background: rgba(0,0,0,0.70); border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 50%; cursor: pointer; color: #fff; font-size: 18px; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
-    .popup-close-btn:hover { background: rgba(0,0,0,0.85); transform: scale(1.08); }
+    .popup-close-btn:hover { background: rgba(200,0,0,0.85); transform: scale(1.1); }
     .popup-close-btn:active { transform: scale(0.94); }
+    @media (max-width: 768px) { #popup-overlay { display: none !important; } }
     .popup-track-wrap { overflow: hidden; position: relative; }
     .popup-track { display: flex; transition: transform 0.5s var(--ease); }
     .popup-slide { flex: 0 0 100%; }
@@ -751,7 +753,7 @@
       display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;
       align-items: flex-start;
     }
-    .footer-logo img { height: 36px; filter: brightness(0) invert(1) opacity(0.9); margin-bottom: 16px; }
+    .footer-logo img { height: 44px; object-fit: contain; margin-bottom: 16px; filter: none; }
     .footer-info { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.9; }
     .footer-tel {
       font-size: 24px; font-weight: 700; color: var(--gold-light);
@@ -1520,6 +1522,9 @@
 
     start();
     window.popupGo = function(i) { stop(); popupGo(i); start(); };
+
+    /* 3초 후 자동 닫힘 */
+    setTimeout(() => overlay.classList.add('hidden'), 3000);
   })();
 
   /* 탭 전환 */
