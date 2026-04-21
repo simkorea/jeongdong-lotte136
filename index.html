@@ -164,60 +164,65 @@
       position: fixed; inset: 0; z-index: 9000;
       background: rgba(0,0,0,0.75);
       display: flex; align-items: center; justify-content: center;
-      padding: 20px;
+      padding: 88px 20px 20px;
       backdrop-filter: blur(6px);
       animation: popFadeIn 0.35s var(--ease);
+      overflow-y: auto;
     }
     #popup-overlay.hidden { display: none; }
     @keyframes popFadeIn { from { opacity: 0; } to { opacity: 1; } }
-    #popup-box {
-      position: relative;
-      max-width: 860px; width: 100%;
-      box-shadow: 0 32px 100px rgba(0,0,0,0.55);
-      overflow: hidden;
-      animation: popBoxUp 0.4s var(--ease);
+    .popup-container {
+      display: flex; gap: 16px; align-items: flex-start;
+      flex-wrap: wrap; justify-content: center;
     }
+    #popup-box, #popup-event-box {
+      width: 350px; flex-shrink: 0; position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+      overflow: hidden;
+      animation: popBoxUp 0.45s var(--ease);
+    }
+    #popup-event-box { animation-delay: 0.08s; }
     @keyframes popBoxUp {
-      from { opacity: 0; transform: translateY(28px) scale(0.97); }
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-    #popup-close {
-      position: absolute; top: 14px; right: 14px; z-index: 20;
-      width: 38px; height: 38px;
+    .popup-close-btn {
+      position: absolute; top: 10px; right: 10px; z-index: 20;
+      width: 34px; height: 34px;
       background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 50%; cursor: pointer; color: #fff; font-size: 18px;
+      border-radius: 50%; cursor: pointer; color: #fff; font-size: 16px;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, transform 0.15s;
     }
-    #popup-close:hover { background: rgba(0,0,0,0.85); transform: scale(1.08); }
-    #popup-close:active { transform: scale(0.94); }
+    .popup-close-btn:hover { background: rgba(0,0,0,0.85); transform: scale(1.08); }
+    .popup-close-btn:active { transform: scale(0.94); }
     .popup-track-wrap { overflow: hidden; position: relative; }
     .popup-track { display: flex; transition: transform 0.5s var(--ease); }
     .popup-slide { flex: 0 0 100%; }
     .popup-slide img {
-      width: 100%; display: block;
+      width: 350px; height: 550px; display: block; object-fit: cover; object-position: center top;
       filter: contrast(1.09) saturate(1.12) brightness(1.02);
+    }
+    .popup-event-img {
+      width: 350px; height: 550px; display: block; object-fit: cover;
     }
     .popup-prev, .popup-next {
       position: absolute; top: 50%; transform: translateY(-50%);
       background: rgba(0,0,0,0.32); border: none; color: #fff;
-      width: 44px; height: 64px; cursor: pointer; font-size: 26px;
+      width: 38px; height: 56px; cursor: pointer; font-size: 22px;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.15s;
-      z-index: 10;
+      transition: background 0.2s; z-index: 10;
     }
-    .popup-prev { left: 0; transform: translateY(-50%); }
-    .popup-next { right: 0; transform: translateY(-50%); }
+    .popup-prev { left: 0; }
+    .popup-next { right: 0; }
     .popup-prev:hover, .popup-next:hover { background: rgba(0,0,0,0.65); }
-    .popup-prev:active { transform: translateY(-50%) scale(0.95); }
-    .popup-next:active { transform: translateY(-50%) scale(0.95); }
     .popup-nav {
-      position: absolute; bottom: 16px; left: 0; right: 0;
-      display: flex; justify-content: center; gap: 9px; align-items: center;
+      position: absolute; bottom: 12px; left: 0; right: 0;
+      display: flex; justify-content: center; gap: 8px; align-items: center;
       z-index: 10;
     }
     .popup-dot {
-      width: 9px; height: 9px; border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: rgba(255,255,255,0.45); border: none; cursor: pointer; padding: 0;
       transition: background 0.2s, transform 0.2s;
     }
@@ -1345,28 +1350,39 @@
      팝업 배너
 ══════════════════════════════════════ -->
 <div id="popup-overlay">
-  <div id="popup-box">
-    <button id="popup-close" aria-label="팝업 닫기">✕</button>
-    <div class="popup-track-wrap">
-      <div class="popup-track" id="popupTrack">
-        <div class="popup-slide">
-          <img src="./images/홈페이지 배너 1.jpg" alt="정동 롯데캐슬 136 견본주택 방문 이벤트">
+  <div class="popup-container">
+
+    <!-- 배너 슬라이더 팝업 -->
+    <div id="popup-box">
+      <button class="popup-close-btn" id="popup-close" aria-label="팝업 닫기">✕</button>
+      <div class="popup-track-wrap">
+        <div class="popup-track" id="popupTrack">
+          <div class="popup-slide">
+            <img src="./images/홈페이지 배너 1.jpg" alt="정동 롯데캐슬 136 견본주택 방문 이벤트">
+          </div>
+          <div class="popup-slide">
+            <img src="./images/홈페이지 배너 3.jpg" alt="정동 롯데캐슬 136 그랜드 오픈">
+          </div>
+          <div class="popup-slide">
+            <img src="./images/홈페이지 배너 4.jpg" alt="정동 롯데캐슬 136 견본주택 방문 이벤트 경품">
+          </div>
         </div>
-        <div class="popup-slide">
-          <img src="./images/홈페이지 배너 3.jpg" alt="정동 롯데캐슬 136 그랜드 오픈">
+        <button class="popup-prev" id="popupPrev" aria-label="이전">‹</button>
+        <button class="popup-next" id="popupNext" aria-label="다음">›</button>
+        <div class="popup-nav">
+          <button class="popup-dot active" onclick="popupGo(0)"></button>
+          <button class="popup-dot" onclick="popupGo(1)"></button>
+          <button class="popup-dot" onclick="popupGo(2)"></button>
         </div>
-        <div class="popup-slide">
-          <img src="./images/홈페이지 배너 4.jpg" alt="정동 롯데캐슬 136 견본주택 방문 이벤트 경품">
-        </div>
-      </div>
-      <button class="popup-prev" id="popupPrev" aria-label="이전">‹</button>
-      <button class="popup-next" id="popupNext" aria-label="다음">›</button>
-      <div class="popup-nav" id="popupNav">
-        <button class="popup-dot active" onclick="popupGo(0)"></button>
-        <button class="popup-dot" onclick="popupGo(1)"></button>
-        <button class="popup-dot" onclick="popupGo(2)"></button>
       </div>
     </div>
+
+    <!-- 이벤트 팝업 -->
+    <div id="popup-event-box">
+      <button class="popup-close-btn" id="popup-event-close" aria-label="이벤트 팝업 닫기">✕</button>
+      <img src="./images/팝업창 이벤트.png" alt="정동 롯데캐슬 136 이벤트 안내" class="popup-event-img">
+    </div>
+
   </div>
 </div>
 
@@ -1384,10 +1400,17 @@
 <script>
   /* 팝업 배너 */
   (function() {
-    const overlay = document.getElementById('popup-overlay');
-    const track   = document.getElementById('popupTrack');
-    const dots    = document.querySelectorAll('.popup-dot');
+    const overlay   = document.getElementById('popup-overlay');
+    const box1      = document.getElementById('popup-box');
+    const box2      = document.getElementById('popup-event-box');
+    const track     = document.getElementById('popupTrack');
+    const dots      = document.querySelectorAll('.popup-dot');
     let cur = 0, total = 3, timer = null;
+
+    function checkAllClosed() {
+      if (box1.classList.contains('hidden') && box2.classList.contains('hidden'))
+        overlay.classList.add('hidden');
+    }
 
     function popupGo(idx) {
       cur = ((idx % total) + total) % total;
@@ -1398,7 +1421,8 @@
     function start() { timer = setInterval(() => popupGo(cur + 1), 3500); }
     function stop()  { clearInterval(timer); }
 
-    document.getElementById('popup-close')?.addEventListener('click', () => overlay.classList.add('hidden'));
+    document.getElementById('popup-close')?.addEventListener('click', () => { box1.classList.add('hidden'); checkAllClosed(); });
+    document.getElementById('popup-event-close')?.addEventListener('click', () => { box2.classList.add('hidden'); checkAllClosed(); });
     overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
     document.getElementById('popupPrev')?.addEventListener('click', () => { stop(); popupGo(cur - 1); start(); });
     document.getElementById('popupNext')?.addEventListener('click', () => { stop(); popupGo(cur + 1); start(); });
