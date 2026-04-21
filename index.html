@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>정동 롯데캐슬 136 | 서울 중구 도심형 프리미엄 주거</title>
-  <meta name="description" content="서울 중구 순화동, 지하7~지상20층 136세대. 아파트형 주택 102세대·오피스텔 34호실. 서울 핵심 4개 노선 반경 500m, CBD 도심 직주근접. 4월 17일 그랜드오픈.">
-  <meta name="keywords" content="정동 롯데캐슬 136, 서울 중구 분양, 순화동 아파트, 도시형생활주택, 오피스텔 분양, CBD 프리미엄, 서울 도심 분양">
+  <title>정동 롯데캐슬 136 | 서울 중구 순화동 프리미엄 분양 · 4월 17일 그랜드오픈</title>
+  <meta name="description" content="정동 롯데캐슬 136 공식 홈페이지. 서울 중구 순화동 6-11번지, 지하7~지상20층 136세대. 시청역 도보 5분, CBD 직주근접. 아파트형 102세대·오피스텔 34호실. 4월 17일 그랜드오픈 · 1666-0753">
+  <meta name="keywords" content="정동 롯데캐슬 136, 롯데캐슬 136, 정동 롯데캐슬, 서울 중구 분양, 순화동 아파트, 순화동 오피스텔, 도시형생활주택 분양, 시청역 분양, 서울역 분양, CBD 프리미엄, 서울 도심 분양, 소형아파트 분양, 2025 서울 분양">
   <meta name="author" content="정동 롯데캐슬 136">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://jeongdong-lotte136.vercel.app/">
@@ -20,6 +20,12 @@
   <meta name="twitter:title" content="정동 롯데캐슬 136 | 서울 중구 도심형 프리미엄 주거">
   <meta name="twitter:description" content="서울 핵심 4개 노선 반경 500m, CBD 직주근접. 4월 17일 그랜드오픈.">
   <meta name="twitter:image" content="https://jeongdong-lotte136.vercel.app/images/조감도1.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <!-- 네이버 SEO -->
+  <meta name="naver-site-verification" content="네이버서치어드바이저_인증코드_여기입력">
+  <meta name="NaverBot" content="All">
+  <meta name="Yeti" content="All">
   <meta name="geo.region" content="KR-11">
   <meta name="geo.placename" content="서울 중구 순화동 6-11번지">
   <meta name="geo.position" content="37.5658;126.9681">
@@ -50,6 +56,30 @@
       "availability": "https://schema.org/PreOrder",
       "description": "2025년 4월 17일 그랜드오픈, 4월 22일 오피스텔 청약, 4월 27일 아파트형 주택 청약"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "정동 롯데캐슬 136 홍보관",
+    "image": "https://jeongdong-lotte136.vercel.app/images/조감도1.jpg",
+    "telephone": "1666-0753",
+    "url": "https://jeongdong-lotte136.vercel.app/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "순화동 6-11번지 일대",
+      "addressLocality": "중구",
+      "addressRegion": "서울특별시",
+      "addressCountry": "KR"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "priceRange": "문의"
   }
   </script>
 
@@ -768,6 +798,55 @@
       .hero-banner { flex-wrap: wrap; }
       .hb-item { flex: 1 1 50%; }
     }
+
+    /* ════════════════════════════
+       모바일 하단 고정 CTA
+    ════════════════════════════ */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      height: 56px; box-shadow: 0 -3px 20px rgba(0,0,0,0.15);
+    }
+    .mob-btn-tel, .mob-btn-consult {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      gap: 7px; font-size: 14px; font-weight: 700; text-decoration: none;
+      letter-spacing: 0.04em; font-family: 'Noto Sans KR', sans-serif;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .mob-btn-tel { background: var(--navy); color: #fff; }
+    .mob-btn-consult { background: var(--gold); color: #fff; }
+    .mob-btn-tel:active, .mob-btn-consult:active { opacity: 0.85; transform: scale(0.99); }
+
+    @media (max-width: 768px) {
+      .mobile-cta-bar { display: flex; }
+      body { padding-bottom: 56px; }
+      /* 팝업 모바일 */
+      .popup-container { flex-direction: column; align-items: center; gap: 10px; }
+      #popup-box, #popup-event-box { width: min(340px, calc(100vw - 32px)); }
+      .popup-slide img, .popup-event-img { width: 100%; height: 400px; }
+      /* 헤더 */
+      .header-right .header-tel { display: none; }
+      .header-inner { height: 64px; }
+      .header-logo { height: 40px; }
+      /* 탭 가로 스크롤 */
+      .tab-btns, .type-tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+      .tab-btn, .type-tab { white-space: nowrap; flex-shrink: 0; }
+      /* 요약 밴드 */
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      /* 분양일정 배지 */
+      .sched-date { font-size: 20px; }
+      /* 상담폼 */
+      #consultation { padding: 56px 20px; }
+      .form-wrap { padding: 28px 20px; }
+    }
+    @media (max-width: 480px) {
+      .btn-header-consult { font-size: 11px; padding: 7px 12px; }
+      .btn-menu { display: none; }
+      .hero-tagline { font-size: clamp(34px, 10vw, 60px); }
+      .hero-sub { font-size: 10px; letter-spacing: 0.06em; }
+      .hb-item { padding: 10px 14px; }
+      .hb-date { font-size: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -1347,6 +1426,21 @@
 
 
 <!-- ══════════════════════════════════════
+     모바일 하단 CTA
+══════════════════════════════════════ -->
+<div class="mobile-cta-bar" role="navigation" aria-label="모바일 빠른 연결">
+  <a href="tel:1666-0753" class="mob-btn-tel" aria-label="전화 문의 1666-0753">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    전화 문의
+  </a>
+  <a href="#consultation" class="mob-btn-consult" aria-label="관심고객 등록">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    관심고객 등록
+  </a>
+</div>
+
+
+<!-- ══════════════════════════════════════
      팝업 배너
 ══════════════════════════════════════ -->
 <div id="popup-overlay">
@@ -1380,7 +1474,9 @@
     <!-- 이벤트 팝업 -->
     <div id="popup-event-box">
       <button class="popup-close-btn" id="popup-event-close" aria-label="이벤트 팝업 닫기">✕</button>
-      <img src="./images/팝업창 이벤트.png" alt="정동 롯데캐슬 136 이벤트 안내" class="popup-event-img">
+      <a href="#consultation" id="popup-event-link" style="display:block;cursor:pointer;" title="관심고객 등록하기">
+        <img src="./images/팝업창 이벤트.png" alt="정동 롯데캐슬 136 이벤트 - 클릭하여 관심고객 등록" class="popup-event-img">
+      </a>
     </div>
 
   </div>
@@ -1456,27 +1552,52 @@
     document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  /* 폼 제출 — Supabase 저장 */
+  /* 이벤트 팝업 클릭 → 팝업 닫고 관심고객등록으로 이동 */
+  document.getElementById('popup-event-link')?.addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.add('hidden');
+  });
+
+  /* 폼 제출 — Supabase 저장 + 이메일 알림 */
   document.getElementById('consultForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('.btn-submit');
     btn.disabled = true; btn.textContent = '신청 중...';
 
-    const { error } = await _sb.from('consultations').insert([{
+    const payload = {
       name:      this.name.value.trim(),
       phone:     this.phone.value.trim(),
       unit_type: this.unit_type.value,
       purpose:   this.purpose.value,
       message:   this.message.value.trim(),
       project:   '정동 롯데캐슬 136'
-    }]);
+    };
 
+    /* 1) Supabase 저장 */
+    const { error } = await _sb.from('consultations').insert([payload]);
     if (error) {
       btn.disabled = false;
       btn.textContent = '관심고객 등록하기';
       alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.\n' + error.message);
       return;
     }
+
+    /* 2) 이메일 알림 (Web3Forms) */
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'WEB3FORMS_ACCESS_KEY',
+          subject: `[정동 롯데캐슬 136] 새 관심고객 등록 — ${payload.name}`,
+          from_name: '정동 롯데캐슬 136 홈페이지',
+          이름: payload.name,
+          연락처: payload.phone,
+          관심타입: payload.unit_type || '미선택',
+          투자목적: payload.purpose || '미선택',
+          문의내용: payload.message || '없음'
+        })
+      });
+    } catch (_) {}
 
     document.getElementById('consultForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
