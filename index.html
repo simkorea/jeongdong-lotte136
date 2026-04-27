@@ -191,7 +191,7 @@
        팝업 배너
     ════════════════════════════ */
     #popup-overlay {
-      position: fixed; inset: 0; z-index: 9000;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9000;
       background: rgba(0,0,0,0.75);
       display: flex; align-items: center; justify-content: center;
       padding: 88px 20px 20px;
@@ -205,13 +205,14 @@
       display: flex; gap: 16px; align-items: flex-start;
       flex-wrap: wrap; justify-content: center;
     }
-    #popup-box, #popup-event-box {
+    #popup-box, #popup-event-box, #popup-subscription-box {
       width: 350px; flex-shrink: 0; position: relative;
       box-shadow: 0 24px 80px rgba(0,0,0,0.55);
       overflow: hidden;
       animation: popBoxUp 0.45s var(--ease);
     }
     #popup-event-box { animation-delay: 0.08s; }
+    #popup-subscription-box { animation-delay: 0.16s; }
     @keyframes popBoxUp {
       from { opacity: 0; transform: translateY(24px) scale(0.97); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -227,7 +228,7 @@
     }
     .popup-close-btn:hover { background: rgba(200,0,0,0.85); transform: scale(1.1); }
     .popup-close-btn:active { transform: scale(0.94); }
-    @media (max-width: 768px) { #popup-overlay { display: none !important; } }
+    
     .popup-track-wrap { overflow: hidden; position: relative; }
     .popup-track { display: flex; transition: transform 0.5s var(--ease); }
     .popup-slide { flex: 0 0 100%; }
@@ -823,9 +824,10 @@
       .mobile-cta-bar { display: flex; }
       body { padding-bottom: 56px; }
       /* 팝업 모바일 */
-      .popup-container { flex-direction: column; align-items: center; gap: 10px; }
-      #popup-box, #popup-event-box { width: min(340px, calc(100vw - 32px)); }
-      .popup-slide img, .popup-event-img { width: 100%; height: 400px; }
+      #popup-overlay { align-items: flex-start; padding: 20px 10px; }
+      .popup-container { flex-direction: column; align-items: center; gap: 14px; padding: 20px 0; }
+      #popup-box, #popup-event-box, #popup-subscription-box { width: min(310px, calc(100vw - 32px)); }
+      .popup-slide img, .popup-event-img { width: 100%; height: auto; aspect-ratio: 350/550; }
       /* 헤더 */
       .header-right .header-tel { display: none; }
       .header-inner { height: 64px; }
@@ -1010,61 +1012,6 @@
 </section>
 
 
-<!-- ══════════════════════════════════════
-     분양일정
-══════════════════════════════════════ -->
-<section id="schedule" class="section section-alt">
-  <div class="container">
-    <div class="fade-up">
-      <div class="sec-eyebrow">SCHEDULE</div>
-      <h2 class="sec-title">분양 일정</h2>
-      <div class="divider"></div>
-    </div>
-
-    <div class="schedule-grid fade-up">
-      <div class="sched-item s-grand">
-        <div class="sched-date">4.17</div>
-        <div class="sched-day">금요일</div>
-        <div class="sched-lbl">그랜드 오픈</div>
-        <span class="sched-badge b-grand">GRAND OPEN</span>
-      </div>
-      <div class="sched-item s-ot">
-        <div class="sched-date">4.22</div>
-        <div class="sched-day">화요일</div>
-        <div class="sched-lbl">오피스텔<br>청약접수</div>
-        <span class="sched-badge b-ot">O.T 청약</span>
-      </div>
-      <div class="sched-item s-apt">
-        <div class="sched-date">4.27</div>
-        <div class="sched-day">일요일</div>
-        <div class="sched-lbl">아파트형<br>청약접수</div>
-        <span class="sched-badge b-apt">아파트형</span>
-      </div>
-      <div class="sched-item s-win">
-        <div class="sched-date">4.30</div>
-        <div class="sched-day">수요일</div>
-        <div class="sched-lbl">당첨자 발표</div>
-        <span class="sched-badge b-win">발표</span>
-      </div>
-      <div class="sched-item s-ot">
-        <div class="sched-date">5.1</div>
-        <div class="sched-day">목요일</div>
-        <div class="sched-lbl">정당계약<br>(O.T)</div>
-        <span class="sched-badge b-ot">계약</span>
-      </div>
-      <div class="sched-item s-apt">
-        <div class="sched-date">5.11</div>
-        <div class="sched-day">일요일</div>
-        <div class="sched-lbl">정당계약<br>(아파트형)</div>
-        <span class="sched-badge b-apt">계약</span>
-      </div>
-    </div>
-
-    <div class="schedule-img-wrap fade-up">
-      <img src="./images/분양일정.jpg" alt="정동 롯데캐슬 136 분양 캘린더 전체 일정" loading="lazy">
-    </div>
-  </div>
-</section>
 
 
 <!-- ══════════════════════════════════════
@@ -1473,6 +1420,14 @@
       </div>
     </div>
 
+    <!-- 청약인증 이벤트 팝업 -->
+    <div id="popup-subscription-box">
+      <button class="popup-close-btn" id="popup-subscription-close" aria-label="청약 팝업 닫기">✕</button>
+      <a href="#consultation" id="popup-subscription-link" style="display:block;cursor:pointer;" title="관심고객 등록하기">
+        <img src="./images/팝업창 청약.png" alt="정동 롯데캐슬 136 청약인증 이벤트 - 클릭하여 관심고객 등록" class="popup-event-img">
+      </a>
+    </div>
+
     <!-- 이벤트 팝업 -->
     <div id="popup-event-box">
       <button class="popup-close-btn" id="popup-event-close" aria-label="이벤트 팝업 닫기">✕</button>
@@ -1494,12 +1449,13 @@
     const overlay   = document.getElementById('popup-overlay');
     const box1      = document.getElementById('popup-box');
     const box2      = document.getElementById('popup-event-box');
+    const box3      = document.getElementById('popup-subscription-box');
     const track     = document.getElementById('popupTrack');
     const dots      = document.querySelectorAll('.popup-dot');
     let cur = 0, total = 3, timer = null;
 
     function checkAllClosed() {
-      if (box1.classList.contains('hidden') && box2.classList.contains('hidden'))
+      if (box1.classList.contains('hidden') && box2.classList.contains('hidden') && box3.classList.contains('hidden'))
         overlay.classList.add('hidden');
     }
 
@@ -1514,6 +1470,7 @@
 
     document.getElementById('popup-close')?.addEventListener('click', () => { box1.classList.add('hidden'); checkAllClosed(); });
     document.getElementById('popup-event-close')?.addEventListener('click', () => { box2.classList.add('hidden'); checkAllClosed(); });
+    document.getElementById('popup-subscription-close')?.addEventListener('click', () => { box3.classList.add('hidden'); checkAllClosed(); });
     overlay?.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
     document.getElementById('popupPrev')?.addEventListener('click', () => { stop(); popupGo(cur - 1); start(); });
     document.getElementById('popupNext')?.addEventListener('click', () => { stop(); popupGo(cur + 1); start(); });
@@ -1523,8 +1480,8 @@
     start();
     window.popupGo = function(i) { stop(); popupGo(i); start(); };
 
-    /* 3초 후 자동 닫힘 */
-    setTimeout(() => overlay.classList.add('hidden'), 3000);
+    /* 3초 후 자동 닫힘 (사용자 요청으로 제거)
+    setTimeout(() => overlay.classList.add('hidden'), 3000); */
   })();
 
   /* 탭 전환 */
@@ -1552,6 +1509,9 @@
 
   /* 이벤트 팝업 클릭 → 팝업 닫고 관심고객등록으로 이동 */
   document.getElementById('popup-event-link')?.addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.add('hidden');
+  });
+  document.getElementById('popup-subscription-link')?.addEventListener('click', function() {
     document.getElementById('popup-overlay').classList.add('hidden');
   });
 
